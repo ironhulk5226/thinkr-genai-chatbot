@@ -1,8 +1,8 @@
-# Thinker — GenAI Chatbot
+# Thinkr — GenAI Chatbot
 
-![Thinker Logo](frontend/public/Logo.png)
+![Thinkr Logo](frontend/public/Logo.png)
 
-**Thinker** is an intelligent AI-powered chatbot that combines a large language model with real-time web search to deliver accurate, context-aware answers. It remembers your conversation history within a session, searches the web only when needed, and presents responses with rich formatting including code blocks, bullet lists, and bold text.
+**Thinkr** is an intelligent AI-powered chatbot that combines a large language model with real-time web search to deliver accurate, context-aware answers. It remembers your conversation history within a session, searches the web only when needed, and presents responses with rich formatting including code blocks, bullet lists, and bold text.
 
 ---
 
@@ -90,7 +90,7 @@ User (Browser)
 ## Project Structure
 
 ```
-thinker-genai-chatbot/
+Thinkr-genai-chatbot/
 ├── server.js              # Express server — defines /chat endpoint
 ├── chatbot.js             # AI engine — LLM calls, web search, memory
 ├── Dockerfile             # Production Docker image
@@ -121,8 +121,8 @@ thinker-genai-chatbot/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ironhulk5226/thinker-genai-chatbot.git
-cd thinker-genai-chatbot
+git clone https://github.com/ironhulk5226/Thinkr-genai-chatbot.git
+cd Thinkr-genai-chatbot
 ```
 
 ### 2. Install dependencies
@@ -323,7 +323,7 @@ Assistant: "The iPhone 17 starts at $799."
 ### Build the image
 
 ```bash
-docker build -t thinker-chatbot:latest .
+docker build -t Thinkr-chatbot:latest .
 ```
 
 ### Run the container
@@ -333,8 +333,8 @@ docker run -d \
   -p 1000:1000 \
   -e GROQ_API_KEY=your_groq_api_key \
   -e TAVILY_API_KEY=your_tavily_api_key \
-  --name thinker \
-  thinker-chatbot:latest
+  --name Thinkr \
+  Thinkr-chatbot:latest
 ```
 
 The API is now available at **http://localhost:1000**.
