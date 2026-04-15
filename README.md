@@ -154,6 +154,8 @@ TAVILY_API_KEY=your_tavily_api_key_here
 |---|---|---|
 | `GROQ_API_KEY` | ✅ Yes | API key for the Groq LLM service |
 | `TAVILY_API_KEY` | ✅ Yes | API key for Tavily web search |
+| `API_URL` | ✅ Yes | Backend base URL served to frontend via `/config` |
+| `API_PORT` | Optional | Port used by Express server (default: `1000`) |
 
 **Hardcoded defaults** (changeable in source):
 
@@ -164,7 +166,7 @@ TAVILY_API_KEY=your_tavily_api_key_here
 | LLM temperature | `0` (deterministic) | `chatbot.js` |
 | Session TTL | `86400` seconds (24 h) | `chatbot.js` |
 | Max tool retries | `5` | `chatbot.js` |
-| Backend URL (frontend) | `http://localhost:1000` | `frontend/script.js` |
+| Backend URL (frontend) | `API_URL` from `.env` | `server.js` + `frontend/script.js` |
 
 ---
 
@@ -176,7 +178,7 @@ TAVILY_API_KEY=your_tavily_api_key_here
 node server.js
 ```
 
-The server starts on **http://localhost:1000**.
+The server starts on the port from `API_PORT` (default: **1000**).
 
 ### Open the frontend
 
@@ -189,7 +191,7 @@ http-server -p 3000
 # Then open http://localhost:3000
 ```
 
-> **Note:** The frontend calls the backend at `http://localhost:1000`. CORS is enabled on the server, so the frontend may be served from any origin.
+> **Note:** The frontend gets backend URL from `GET /config`, which returns `API_URL` from `.env`. CORS is enabled on the server, so the frontend may be served from any origin.
 
 ---
 
@@ -337,7 +339,7 @@ docker run -d \
   Thinkr-chatbot:latest
 ```
 
-The API is now available at **http://localhost:1000**.
+The API is now available at the host/port you configure (for local default: **http://localhost:1000**).
 
 > The frontend (`frontend/`) must be served separately (e.g., via nginx or a static hosting service) and configured to point at the running container's address.
 

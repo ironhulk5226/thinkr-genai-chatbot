@@ -7,6 +7,25 @@ const askBtn = document.querySelector('#ask-btn')
 // generate unique session id everytime when new page loads
 const sessionId = uuidv4();
 
+// Load API URL from server config
+let API_URL = '';
+
+const configReady = (async () => {
+    try {
+        const response = await fetch('/config');
+
+        if (!response.ok) {
+            throw new Error('Config endpoint unavailable');
+        }
+
+        const config = await response.json();
+        API_URL = config.apiUrl || '';
+    } catch (error) {
+        // Keep relative fallback so requests still work when frontend and backend share origin.
+        API_URL = '';
+    }
+})();
+
 
 input?.addEventListener('keyup',handleEnter)
 askBtn?.addEventListener('click',handleAsk)
@@ -156,7 +175,9 @@ async function generate(query){
 }
 
 async function callServer(inputText){
-    const response = await fetch('http://localhost:1000/chat',{
+    await configReady;
+
+    const response = await fetch(`${API_URL}/chat`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
